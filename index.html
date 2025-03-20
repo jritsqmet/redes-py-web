@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interfaces de la Aplicación</title>
+    <title>Interfaces de la Aplicación Mejorada</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -24,7 +24,7 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 90%;
-            max-width: 1000px;
+            max-width: 1200px;
         }
         .interface {
             border: 1px solid #ccc;
@@ -44,7 +44,7 @@
             margin-bottom: 5px;
             font-weight: bold;
         }
-        .form-group input, .form-group select {
+        .form-group input, .form-group select, .form-group textarea {
             width: 100%;
             padding: 8px;
             border: 1px solid #ccc;
@@ -62,6 +62,18 @@
         .button:hover {
             background-color: #1a252f;
         }
+        .button.export {
+            background-color: #27ae60;
+        }
+        .button.export:hover {
+            background-color: #219653;
+        }
+        .button.delete {
+            background-color: #e74c3c;
+        }
+        .button.delete:hover {
+            background-color: #c0392b;
+        }
         .table {
             width: 100%;
             border-collapse: collapse;
@@ -76,6 +88,29 @@
             background-color: #2c3e50;
             color: white;
         }
+        .search-bar {
+            margin-bottom: 15px;
+        }
+        .search-bar input {
+            width: 300px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .message {
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            display: none;
+        }
+        .message.success {
+            background-color: #d5f5e3;
+            color: #27ae60;
+        }
+        .message.error {
+            background-color: #f8d7da;
+            color: #dc3545;
+        }
     </style>
 </head>
 <body>
@@ -83,13 +118,16 @@
         <!-- Interfaz de Gestión de Productos -->
         <div class="interface">
             <h2>Gestión de Productos</h2>
+            <div class="search-bar">
+                <input type="text" id="searchProducto" placeholder="Buscar producto...">
+            </div>
             <div class="form-group">
                 <label for="nombreProducto">Nombre del Producto:</label>
                 <input type="text" id="nombreProducto" placeholder="Ingrese el nombre">
             </div>
             <div class="form-group">
                 <label for="descripcionProducto">Descripción:</label>
-                <input type="text" id="descripcionProducto" placeholder="Ingrese la descripción">
+                <textarea id="descripcionProducto" placeholder="Ingrese la descripción"></textarea>
             </div>
             <div class="form-group">
                 <label for="precioProducto">Precio:</label>
@@ -101,6 +139,8 @@
             </div>
             <button class="button">Guardar Producto</button>
             <button class="button">Limpiar Campos</button>
+            <button class="button export">Exportar a Excel</button>
+            <div class="message success" id="messageProducto">Producto guardado correctamente.</div>
             <table class="table">
                 <thead>
                     <tr>
@@ -119,7 +159,7 @@
                         <td>50</td>
                         <td>
                             <button class="button">Editar</button>
-                            <button class="button">Eliminar</button>
+                            <button class="button delete">Eliminar</button>
                         </td>
                     </tr>
                 </tbody>
@@ -129,6 +169,9 @@
         <!-- Interfaz de Gestión de Clientes -->
         <div class="interface">
             <h2>Gestión de Clientes</h2>
+            <div class="search-bar">
+                <input type="text" id="searchCliente" placeholder="Buscar cliente...">
+            </div>
             <div class="form-group">
                 <label for="nombreCliente">Nombre del Cliente:</label>
                 <input type="text" id="nombreCliente" placeholder="Ingrese el nombre">
@@ -147,6 +190,8 @@
             </div>
             <button class="button">Guardar Cliente</button>
             <button class="button">Limpiar Campos</button>
+            <button class="button export">Exportar a Excel</button>
+            <div class="message success" id="messageCliente">Cliente guardado correctamente.</div>
             <table class="table">
                 <thead>
                     <tr>
@@ -165,7 +210,7 @@
                         <td>cliente1@example.com</td>
                         <td>
                             <button class="button">Editar</button>
-                            <button class="button">Eliminar</button>
+                            <button class="button delete">Eliminar</button>
                         </td>
                     </tr>
                 </tbody>
@@ -175,6 +220,9 @@
         <!-- Interfaz de Gestión de Ventas -->
         <div class="interface">
             <h2>Gestión de Ventas</h2>
+            <div class="search-bar">
+                <input type="text" id="searchVenta" placeholder="Buscar venta...">
+            </div>
             <div class="form-group">
                 <label for="clienteVenta">Cliente:</label>
                 <select id="clienteVenta">
@@ -199,6 +247,8 @@
             </div>
             <button class="button">Registrar Venta</button>
             <button class="button">Limpiar Campos</button>
+            <button class="button export">Generar Reporte</button>
+            <div class="message success" id="messageVenta">Venta registrada correctamente.</div>
             <table class="table">
                 <thead>
                     <tr>
@@ -218,7 +268,7 @@
                         <td>$20.00</td>
                         <td>2023-10-01</td>
                         <td>
-                            <button class="button">Eliminar</button>
+                            <button class="button delete">Eliminar</button>
                         </td>
                     </tr>
                 </tbody>
